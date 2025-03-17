@@ -20,6 +20,7 @@ class BinarySearchTreeNode:
             else:
                 self.right = BinarySearchTreeNode(data)
     
+    # Depth First Traversal  
     def in_order_traversal(self):
         elements = []
 
@@ -61,6 +62,23 @@ class BinarySearchTreeNode:
         
         return elements
     
+    #Breadth First Traversal
+    def breadth_first_traversal(self):
+        elements = []
+        queue = [self]
+        
+        while (len(queue) > 0):
+            curr = queue.pop(0)
+            elements.append(curr.data)
+            
+            if(curr.left is not None):
+                queue.append(curr.left)
+            
+            if (curr.right is not None):
+                queue.append(curr.right)
+        
+        return elements
+                 
     def search(self, val):
         if self.data == val:
             return True
@@ -151,6 +169,7 @@ if __name__ == "__main__":
     print(numbers_tree.pre_order_traversal())
     print(numbers_tree.in_order_traversal())
     print(numbers_tree.post_order_traversal())
+    print(numbers_tree.breadth_first_traversal())
     print(numbers_tree.search(18))
     print(numbers_tree.search(25))
     print(numbers_tree.find_min())
@@ -162,6 +181,7 @@ if __name__ == "__main__":
     print(numbers_tree.in_order_traversal())
     numbers_tree.delete(17)
     print(numbers_tree.in_order_traversal())
+    
 
     print(numbers_tree.calculate_sum())
 
