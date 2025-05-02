@@ -34,6 +34,29 @@ class Trie:
             cur = cur.children[c]
         return True
     
+    def find_prefix(self, prefix: str):
+        cur = self.root
+        
+        for c in prefix:
+            if c not in cur.children:
+                return None
+            cur = cur.children[c]
+        return cur
+    
+    def autocomplete(self, prefix: str):
+        results = []
+        prefix_node = self.find_prefix(prefix)
+        if not prefix_node:
+            return results
+        self._dfs(prefix_node, prefix, results)
+        return results
+    
+    def _dfs(self, node, prefix, results):
+        if node.end_of_word:
+            results.append(prefix)
+        for char, child, in node.children.items():
+            self._dfs(child, prefix + char, results)
+    
     
 if __name__ == "__main__":
     trie = Trie()
